@@ -8,8 +8,35 @@
         <item name="itemTextColor">@color/blue</item>
 
     </style>
+
     <style name="ActiveIndicatorStyle" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
         <item name="android:color">@color/black</item>
     </style>
+
+    <style name="SearchCardView" parent="Widget.Material3.CardView.Outlined">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="strokeWidth">8dp</item>
+        <item name="strokeColor">@color/stroke_gray</item>
+        <item name="cardBackgroundColor">@color/gray</item>
+    </style>
+
+    <style name="SearchEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/light_gray</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="android:background">@color/gray</item>
+    </style>
+
+    <style name="SloganTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/slogan_text_size</item>
+    </style>
+
+    <style name="RounderImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 
 </resources>

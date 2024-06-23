@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="slogan_text_size">22sp</dimen>
+    <dimen name="large_vertical_margin">20dp</dimen>
+    <dimen name="middle_margin">8dp</dimen>
+    <dimen name="large_margin">16dp</dimen>
+    <dimen name="small_margin">4dp</dimen>
+    <dimen name="line_width">2dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+
+</resources>

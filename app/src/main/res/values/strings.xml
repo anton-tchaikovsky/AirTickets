@@ -5,5 +5,10 @@
     <string name="short_way">Короче</string>
     <string name="subscription">Подписки</string>
     <string name="profile">Профиль</string>
+    <string name="search_for_cheap_tickets">Поиск дешевых"\n"авиабилетов</string>
+    <string name="default_where_from">Откуда - Москва</string>
+    <string name="default_where">Куда - Турция</string>
+    <string name="slogan">Музыкально отлететь</string>
+    <string name="search">Поиск</string>
 
 </resources>

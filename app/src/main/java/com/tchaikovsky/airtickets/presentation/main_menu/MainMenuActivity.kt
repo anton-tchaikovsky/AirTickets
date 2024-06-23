@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.presentation
+package com.tchaikovsky.airtickets.presentation.main_menu
 
 import android.os.Bundle
 import android.widget.Toast
@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.ActivityMainMenuBinding
+import com.tchaikovsky.airtickets.presentation.air_tickets.AirTicketsFragment
 import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
 
 class MainMenuActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class MainMenuActivity : AppCompatActivity() {
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initNavigationMenu()
+        openAirTicketsFragment(savedInstanceState)
         viewModel.getScreenLiveData().observe(this) {
             renderMainMenuScreen(it)
         }
@@ -33,27 +35,27 @@ class MainMenuActivity : AppCompatActivity() {
         binding.mainMenuNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.tickets -> {
-                    viewModel.onClickItemMainMenu(MainMenuScreen.TICKETS)
+                    viewModel.onClickItemMainMenu(MainMenuItem.TICKETS)
                     true
                 }
 
                 R.id.hotels -> {
-                    viewModel.onClickItemMainMenu(MainMenuScreen.HOTELS)
+                    viewModel.onClickItemMainMenu(MainMenuItem.HOTELS)
                     true
                 }
 
                 R.id.subscription -> {
-                    viewModel.onClickItemMainMenu(MainMenuScreen.SUBSCRIPTION)
+                    viewModel.onClickItemMainMenu(MainMenuItem.SUBSCRIPTION)
                     true
                 }
 
                 R.id.profile -> {
-                    viewModel.onClickItemMainMenu(MainMenuScreen.PROFILE)
+                    viewModel.onClickItemMainMenu(MainMenuItem.PROFILE)
                     true
                 }
 
                 R.id.short_way -> {
-                    viewModel.onClickItemMainMenu(MainMenuScreen.SHORT_WAY)
+                    viewModel.onClickItemMainMenu(MainMenuItem.SHORT_WAY)
                     true
                 }
 
@@ -62,37 +64,49 @@ class MainMenuActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderMainMenuScreen(mainMenuScreen: MainMenuScreen) {
-        when (mainMenuScreen) {
-            MainMenuScreen.TICKETS -> Toast.makeText(
+    private fun renderMainMenuScreen(mainMenuItem: MainMenuItem) {
+        when (mainMenuItem) {
+            MainMenuItem.TICKETS -> Toast.makeText(
                 this,
-                mainMenuScreen.toString(),
+                mainMenuItem.toString(),
                 Toast.LENGTH_SHORT
             ).show()
 
-            MainMenuScreen.HOTELS -> Toast.makeText(
+            MainMenuItem.HOTELS -> Toast.makeText(
                 this,
-                mainMenuScreen.toString(),
+                mainMenuItem.toString(),
                 Toast.LENGTH_SHORT
             ).show()
 
-            MainMenuScreen.SHORT_WAY -> Toast.makeText(
+            MainMenuItem.SHORT_WAY -> Toast.makeText(
                 this,
-                mainMenuScreen.toString(),
+                mainMenuItem.toString(),
                 Toast.LENGTH_SHORT
             ).show()
 
-            MainMenuScreen.SUBSCRIPTION -> Toast.makeText(
+            MainMenuItem.SUBSCRIPTION -> Toast.makeText(
                 this,
-                mainMenuScreen.toString(),
+                mainMenuItem.toString(),
                 Toast.LENGTH_SHORT
             ).show()
 
-            MainMenuScreen.PROFILE -> Toast.makeText(
+            MainMenuItem.PROFILE -> Toast.makeText(
                 this,
-                mainMenuScreen.toString(),
+                mainMenuItem.toString(),
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    private fun openAirTicketsFragment(savedInstanceState: Bundle?){
+        if (savedInstanceState == null)
+            supportFragmentManager
+                .beginTransaction()
+                .replace(
+                    R.id.fragments_container,
+                    AirTicketsFragment.newInstance(),
+                    AirTicketsFragment.AIR_TICKETS_FRAGMENT_TAG
+                )
+                .commitAllowingStateLoss()
     }
 }
