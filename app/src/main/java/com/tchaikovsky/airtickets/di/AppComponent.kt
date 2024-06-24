@@ -9,6 +9,7 @@ import com.tchaikovsky.airtickets.di.modules.PreferencesModule
 import com.tchaikovsky.airtickets.di.modules.RepositoryModule
 import com.tchaikovsky.airtickets.di.modules.RetrofitModule
 import com.tchaikovsky.airtickets.presentation.main_menu.MainMenuViewModelImpl
+import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsViewModelImpl
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -33,6 +34,8 @@ interface AppComponent {
     }
 
     val mainMenuViewModelImpl: MainMenuViewModelImpl
+
+    val searchTicketsViewModelImpl: SearchTicketsViewModelImpl
 
     fun airTicketsScreenSubcomponent(): AirTicketsScreenSubcomponent
 

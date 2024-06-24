@@ -10,5 +10,11 @@
     <string name="default_where">Куда - Турция</string>
     <string name="slogan">Музыкально отлететь</string>
     <string name="search">Поиск</string>
+    <string name="close">Закрыть</string>
+    <string name="difficult_route">Сложный"\n"маршрут</string>
+    <string name="anywhere">Куда угодно</string>
+    <string name="weekends">Выходные</string>
+    <string name="hot_tickets">Горячие"\n"билеты</string>
+    <string name="popular">Популярное направление</string>
 
 </resources>

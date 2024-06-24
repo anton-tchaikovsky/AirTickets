@@ -13,12 +13,18 @@
         <item name="android:color">@color/black</item>
     </style>
 
-    <style name="SearchCardView" parent="Widget.Material3.CardView.Outlined">
+    <style name="AirTicketScreenCardView" parent="Widget.Material3.CardView.Outlined">
         <item name="cardCornerRadius">16dp</item>
         <item name="strokeWidth">8dp</item>
         <item name="strokeColor">@color/stroke_gray</item>
         <item name="cardBackgroundColor">@color/gray</item>
     </style>
+
+    <style name="SearchTicketScreenCardView" parent="Widget.Material3.CardView.Filled">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardBackgroundColor">@color/stroke_gray</item>
+    </style>
+
 
     <style name="SearchEditText" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/white</item>
@@ -33,9 +39,20 @@
         <item name="android:textSize">@dimen/slogan_text_size</item>
     </style>
 
+    <style name="TabTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
     <style name="RounderImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="SmallRounderImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
     </style>
 
 

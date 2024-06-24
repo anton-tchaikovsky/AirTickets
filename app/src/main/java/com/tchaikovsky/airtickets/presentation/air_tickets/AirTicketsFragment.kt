@@ -1,5 +1,6 @@
 package com.tchaikovsky.airtickets.presentation.air_tickets
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.FragmentAirTicketsBinding
 import com.tchaikovsky.airtickets.presentation.air_tickets.offers_list.OffersAdapter
+import com.tchaikovsky.airtickets.presentation.main_menu.PreferencesListener
 import com.tchaikovsky.airtickets.utility.ViewBindingFragment
 import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
 
@@ -26,6 +28,15 @@ class AirTicketsFragment :
 
     private val offersAdapter: OffersAdapter by lazy {
         OffersAdapter()
+    }
+
+    private lateinit var preferencesListener: PreferencesListener
+
+    override fun onAttach(context: Context) {
+        if (context is PreferencesListener)
+            preferencesListener = context
+        else throw IllegalStateException(ERROR_ACTIVITY_LISTENER)
+        super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,10 +74,11 @@ class AirTicketsFragment :
         with(binding.offersRecycleView) {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = offersAdapter
-            val decorator = DividerItemDecoration(requireContext(),DividerItemDecoration.HORIZONTAL).apply {
-                ContextCompat.getDrawable(requireContext(), R.drawable.decorator)
-                    ?.let { setDrawable(it) }
-            }
+            val decorator =
+                DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL).apply {
+                    ContextCompat.getDrawable(requireContext(), R.drawable.decorator_offers)
+                        ?.let { setDrawable(it) }
+                }
             addItemDecoration(decorator)
         }
     }
@@ -92,11 +104,10 @@ class AirTicketsFragment :
                 Toast.LENGTH_SHORT
             ).show()
 
-            is AirTicketsScreenState.OpenSearchScreenState -> Toast.makeText(
-                requireContext(),
-                "открыть модальное окно",
-                Toast.LENGTH_SHORT
-            ).show()
+            is AirTicketsScreenState.PreferencesState -> preferencesListener.setPreferences(
+                airTicketsScreenState.preferencesWhereFrom,
+                airTicketsScreenState.preferencesWhere
+            )
         }
     }
 
@@ -106,6 +117,8 @@ class AirTicketsFragment :
 
     companion object {
         const val AIR_TICKETS_FRAGMENT_TAG = "AirTicketsFragmentTag"
+
+        const val ERROR_ACTIVITY_LISTENER = "Активити не является слушателем фрагмента"
 
         @JvmStatic
         fun newInstance() = AirTicketsFragment()

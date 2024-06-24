@@ -49,7 +49,7 @@ class AirTicketsViewModelImpl @Inject constructor(private val repository: AirTic
 
             this@AirTicketsViewModelImpl.viewModelScope.launch(exceptionHandler) {
                 offersLiveData.value = getOffers().offers.map {
-                    mapperOfferToOfferUI(it)
+                    mapOfferToOfferUI(it)
                 }
             }
         }
@@ -60,14 +60,14 @@ class AirTicketsViewModelImpl @Inject constructor(private val repository: AirTic
     override fun getSingleEventLiveData(): SingleEventLiveData<AirTicketsScreenState> =
         singleEventLiveData
 
-    override fun onClickSearch(preferencesWhere: String, preferencesWhereFrom: String) {
-        updatePreference(preferencesWhere, preferencesWhereFrom)
+    override fun onClickSearch(preferencesWhereFrom: String, preferencesWhere: String) {
+        updatePreference(preferencesWhereFrom, preferencesWhere)
         singleEventLiveData.value =
-            AirTicketsScreenState.OpenSearchScreenState(preferencesWhere, preferencesWhereFrom)
+            AirTicketsScreenState.PreferencesState(preferencesWhereFrom, preferencesWhere)
     }
 
-    override fun onViewPause(preferencesWhere: String, preferencesWhereFrom: String) {
-        updatePreference(preferencesWhere, preferencesWhereFrom)
+    override fun onViewPause(preferencesWhereFrom: String, preferencesWhere: String) {
+        updatePreference(preferencesWhereFrom, preferencesWhere)
     }
 
     private fun updatePreference(preferencesWhereFrom: String, preferencesWhere: String){
@@ -76,7 +76,7 @@ class AirTicketsViewModelImpl @Inject constructor(private val repository: AirTic
         repository.savePreferences(preferencesWhereFrom to preferencesWhere)
     }
 
-    private fun mapperOfferToOfferUI(offer: Offer): OfferUi =
+    private fun mapOfferToOfferUI(offer: Offer): OfferUi =
         OfferUi(
             idImage = when (offer.id) {
                 1 -> R.drawable.first_foto
@@ -90,6 +90,6 @@ class AirTicketsViewModelImpl @Inject constructor(private val repository: AirTic
         )
 
     companion object {
-        private const val DEFAULT_ERROR = " Default error"
+        private const val DEFAULT_ERROR = "Default error"
     }
 }

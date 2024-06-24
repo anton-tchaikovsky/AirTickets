@@ -13,7 +13,7 @@ interface AirTicketsViewModel {
 
     fun getSingleEventLiveData(): SingleEventLiveData<AirTicketsScreenState>
 
-    fun onClickSearch(preferencesWhere: String, preferencesWhereFrom: String)
+    fun onClickSearch(preferencesWhereFrom: String, preferencesWhere: String)
 
-    fun onViewPause(preferencesWhere: String, preferencesWhereFrom: String)
+    fun onViewPause(preferencesWhereFrom: String, preferencesWhere: String)
 }

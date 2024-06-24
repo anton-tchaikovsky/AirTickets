@@ -2,6 +2,7 @@ package com.tchaikovsky.airtickets.data.repository
 
 import com.tchaikovsky.airtickets.data.data_source.RemoteDataSource
 import com.tchaikovsky.airtickets.data.preferences.SearchPreferences
+import com.tchaikovsky.airtickets.domain.entity.Popular
 import com.tchaikovsky.airtickets.domain.entity.offers.Offers
 import com.tchaikovsky.airtickets.domain.entity.tickets.Tickets
 import com.tchaikovsky.airtickets.domain.entity.tickets_offers.TicketsOffers
@@ -14,6 +15,9 @@ class AirTicketsRepositoryImpl @Inject constructor(
 ) :
     AirTicketsRepository {
     override suspend fun getOffers(): Offers = remoteDataSource.getOffers()
+
+    override suspend fun getMockPopulars(): List<Popular> =
+        listOf(Popular(1, "Стамбул"), Popular(2, "Сочи"), Popular(3, "Пхукет"))
 
     override suspend fun getTicketsOffers(): TicketsOffers =
         remoteDataSource.getTicketsOffers()

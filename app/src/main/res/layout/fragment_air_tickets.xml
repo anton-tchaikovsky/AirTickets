@@ -12,7 +12,7 @@
         style="@style/SloganTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_vertical_margin"
+        android:layout_marginTop="@dimen/big_margin"
         android:text="@string/search_for_cheap_tickets"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,11 +21,11 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/search_tickets_container_card_view"
-        style="@style/SearchCardView"
+        style="@style/AirTicketScreenCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/middle_margin"
-        android:layout_marginTop="@dimen/large_vertical_margin"
+        android:layout_marginTop="@dimen/big_margin"
         app:layout_constraintTop_toBottomOf="@id/search_for_cheap_tickets_text_view">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/middle_margin"
-        android:layout_marginTop="@dimen/large_vertical_margin"
+        android:layout_marginTop="@dimen/big_margin"
         android:text="@string/slogan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_tickets_container_card_view" />
@@ -102,7 +102,7 @@
         android:id="@+id/offers_recycle_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_vertical_margin"
+        android:layout_marginTop="@dimen/big_margin"
         app:layout_constraintTop_toBottomOf="@id/slogan_text_view"
         android:layout_marginHorizontal="@dimen/middle_margin"/>
 

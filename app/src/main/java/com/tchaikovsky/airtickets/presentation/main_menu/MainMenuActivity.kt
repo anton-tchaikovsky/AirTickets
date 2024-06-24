@@ -1,16 +1,19 @@
 package com.tchaikovsky.airtickets.presentation.main_menu
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.ActivityMainMenuBinding
 import com.tchaikovsky.airtickets.presentation.air_tickets.AirTicketsFragment
+import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsFragment
 import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
 
-class MainMenuActivity : AppCompatActivity() {
+class MainMenuActivity : AppCompatActivity(), PreferencesListener {
 
     private lateinit var binding: ActivityMainMenuBinding
 
@@ -20,15 +23,33 @@ class MainMenuActivity : AppCompatActivity() {
         })[MainMenuViewModelImpl::class.java]
     }
 
+    private lateinit var searchBottomSheetBehavior: BottomSheetBehavior<View>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initNavigationMenu()
+        initSearchBottomSheetDialogFragment()
         openAirTicketsFragment(savedInstanceState)
         viewModel.getScreenLiveData().observe(this) {
             renderMainMenuScreen(it)
         }
+    }
+
+    override fun setPreferences(preferencesWhereFrom: String?, preferencesWhere: String?) {
+        searchBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.search_tickets_container,
+                SearchTicketsFragment.newInstance(preferencesWhereFrom, preferencesWhere),
+                SearchTicketsFragment.TAG_SEARCH_BOTTOM_SHEET_DIALOG_FRAGMENT
+            )
+            .commitAllowingStateLoss()
+    }
+
+    private fun initSearchBottomSheetDialogFragment() {
+        searchBottomSheetBehavior = BottomSheetBehavior.from(binding.searchBottomSheet)
     }
 
     private fun initNavigationMenu() {
@@ -98,7 +119,7 @@ class MainMenuActivity : AppCompatActivity() {
         }
     }
 
-    private fun openAirTicketsFragment(savedInstanceState: Bundle?){
+    private fun openAirTicketsFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null)
             supportFragmentManager
                 .beginTransaction()
