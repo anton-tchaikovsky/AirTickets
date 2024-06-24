@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.ActivityMainMenuBinding
@@ -13,7 +14,7 @@ import com.tchaikovsky.airtickets.presentation.air_tickets.AirTicketsFragment
 import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsFragment
 import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
 
-class MainMenuActivity : AppCompatActivity(), PreferencesListener {
+class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchTicketsFragmentListener {
 
     private lateinit var binding: ActivityMainMenuBinding
 
@@ -39,13 +40,30 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener {
 
     override fun setPreferences(preferencesWhereFrom: String?, preferencesWhere: String?) {
         searchBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        searchBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    with(supportFragmentManager){
+                        findFragmentByTag(SearchTicketsFragment.TAG_SEARCH_TICKETS_FRAGMENT)?.let {
+                            beginTransaction().remove(it).commit()
+                        }
+                    }
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.search_tickets_container,
                 SearchTicketsFragment.newInstance(preferencesWhereFrom, preferencesWhere),
-                SearchTicketsFragment.TAG_SEARCH_BOTTOM_SHEET_DIALOG_FRAGMENT
+                SearchTicketsFragment.TAG_SEARCH_TICKETS_FRAGMENT
             )
             .commitAllowingStateLoss()
+    }
+
+    override fun onRemoveFragment() {
+        searchBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     private fun initSearchBottomSheetDialogFragment() {

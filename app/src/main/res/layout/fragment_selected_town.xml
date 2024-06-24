@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".presentation.selected_town.SelectedTownFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/selected_town_container_card_view"
+        style="@style/SearchTicketScreenCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/small_padding">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/stroke_gray"
+                android:contentDescription="@string/back"
+                android:src="@drawable/baseline_arrow_back_24"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <View
+                android:id="@+id/line_view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/line_width"
+                android:layout_marginHorizontal="@dimen/middle_margin"
+                android:background="@color/gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/where_from_edit_text"
+                style="@style/SearchEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/middle_margin"
+                android:background="@color/stroke_gray"
+                android:hint="@string/default_where_from"
+                app:layout_constraintBottom_toTopOf="@id/line_view"
+                app:layout_constraintEnd_toEndOf="@id/line_view"
+                app:layout_constraintStart_toEndOf="@id/back_button"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/where_edit_text"
+                style="@style/SearchEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/middle_margin"
+                android:background="@color/stroke_gray"
+                android:hint="@string/default_where"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/back_button"
+                app:layout_constraintTop_toBottomOf="@id/line_view"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/reverse_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="@dimen/big_margin"
+                android:backgroundTint="@color/stroke_gray"
+                android:contentDescription="@string/reverse"
+                android:src="@drawable/reverse"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toTopOf="@id/line_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/close_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="@dimen/big_margin"
+                android:backgroundTint="@color/stroke_gray"
+                android:contentDescription="@string/close"
+                android:src="@drawable/baseline_close_24"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line_view"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <HorizontalScrollView
+        android:id="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/selected_town_container_card_view">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="VisualLintBounds">
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/conversely_fab"
+                style="@style/TabFabStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="@dimen/small_margin"
+                android:text="@string/conversely"
+                app:icon="@drawable/plus" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/date_fab"
+                style="@style/TabFabStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="@dimen/small_margin"
+                android:text="24 фев, сб"
+                 />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/ticket_fab"
+                style="@style/TabFabStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="@dimen/small_margin"
+                android:text="@string/economy"
+                app:icon="@drawable/people" />
+
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:id="@+id/filters_fab"
+                style="@style/TabFabStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="@dimen/small_margin"
+                android:text="@string/filters"
+                app:icon="@drawable/filters" />
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/tickets_offer_container_card_view"
+        style="@style/SearchTicketScreenCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        app:layout_constraintTop_toBottomOf="@id/tab_container">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/direct_flights_text_view"
+                style="@style/SloganTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/middle_margin"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/middle_margin"
+                android:text="@string/direct_flights"
+                android:textSize="@dimen/title_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tickets_offer_recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/middle_margin"
+                app:layout_constraintTop_toBottomOf="@id/direct_flights_text_view" />
+
+            <TextView
+                android:id="@+id/show_all_text_view"
+                style="@style/BlueTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/middle_margin"
+                android:layout_marginVertical="@dimen/middle_margin"
+                android:text="@string/show_all"
+                android:textSize="@dimen/title_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tickets_offer_recycle_view"
+                tools:ignore="TextContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/view_all_tickets_fab"
+        style="@style/BlueFabStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        android:text="@string/view_all_tickets"
+        app:layout_constraintTop_toBottomOf="@id/tickets_offer_container_card_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="VisualLintButtonSize" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

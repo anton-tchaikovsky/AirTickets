@@ -8,5 +8,6 @@
     <color name ="stroke_gray">#2F3035</color>
     <color name="light_black">#242529</color>
     <color name="drag_handle_gray">#5E5F61</color>
+    <color name="red"> #FF5E5E</color>
 
 </resources>

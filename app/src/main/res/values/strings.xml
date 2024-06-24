@@ -16,5 +16,13 @@
     <string name="weekends">Выходные</string>
     <string name="hot_tickets">Горячие"\n"билеты</string>
     <string name="popular">Популярное направление</string>
+    <string name="back">Назад</string>
+    <string name="reverse">Поменять местами</string>
+    <string name="conversely">обратно</string>
+    <string name="economy">1,эконом</string>
+    <string name="filters">фильтры</string>
+    <string name="view_all_tickets">Посмотреть все билеты</string>
+    <string name="direct_flights">Прямые рейсы</string>
+    <string name="show_all">Показать все</string>
 
 </resources>

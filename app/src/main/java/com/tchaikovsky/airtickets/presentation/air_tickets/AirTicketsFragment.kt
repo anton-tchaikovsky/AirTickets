@@ -76,7 +76,7 @@ class AirTicketsFragment :
             adapter = offersAdapter
             val decorator =
                 DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL).apply {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.decorator_offers)
+                    ContextCompat.getDrawable(requireContext(), R.drawable.decorator_vertical)
                         ?.let { setDrawable(it) }
                 }
             addItemDecoration(decorator)

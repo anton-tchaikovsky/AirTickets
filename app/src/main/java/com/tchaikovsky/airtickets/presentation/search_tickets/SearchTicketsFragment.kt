@@ -1,5 +1,6 @@
 package com.tchaikovsky.airtickets.presentation.search_tickets
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,8 +11,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tchaikovsky.airtickets.AirTicketsApp
+import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.FragmentSearchTicketsBinding
+import com.tchaikovsky.airtickets.presentation.air_tickets.AirTicketsFragment.Companion.ERROR_ACTIVITY_LISTENER
+import com.tchaikovsky.airtickets.presentation.main_menu.RemoveSearchTicketsFragmentListener
 import com.tchaikovsky.airtickets.presentation.search_tickets.popular_list.PopularsAdapter
+import com.tchaikovsky.airtickets.presentation.selected_town.SelectedTownFragment
 import com.tchaikovsky.airtickets.utility.ViewBindingFragment
 import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
 
@@ -28,20 +33,29 @@ class SearchTicketsFragment : ViewBindingFragment<FragmentSearchTicketsBinding>(
         })[SearchTicketsViewModelImpl::class.java]
     }
 
+    private lateinit var removeSearchTicketsFragmentListener: RemoveSearchTicketsFragmentListener
+
+    override fun onAttach(context: Context) {
+        if (context is RemoveSearchTicketsFragmentListener)
+            removeSearchTicketsFragmentListener = context
+        else throw IllegalStateException(ERROR_ACTIVITY_LISTENER)
+        super.onAttach(context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             initSearchTicketsView(it.getString(KEY_WHERE_FROM), it.getString(KEY_WHERE))
         }
         initPopularsRecycleView()
-        initTab()
+        initTabs()
         with(viewModel) {
             getPopularsLiveData().observe(viewLifecycleOwner) { renderPopulars(it) }
             getSingleEventLiveData().observe(viewLifecycleOwner) { renderData(it) }
         }
     }
 
-    private fun initTab() {
+    private fun initTabs() {
         with(binding) {
             difficultRouteImageButton.setOnClickListener {
                 viewModel.onClickTab(Tab.DIFFICULT_ROUTER)
@@ -84,7 +98,7 @@ class SearchTicketsFragment : ViewBindingFragment<FragmentSearchTicketsBinding>(
                 DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL).apply {
                     ContextCompat.getDrawable(
                         requireContext(),
-                        com.tchaikovsky.airtickets.R.drawable.decorator_populars
+                        R.drawable.decorator_horizontal
                     )
                         ?.let { setDrawable(it) }
                 }
@@ -103,7 +117,22 @@ class SearchTicketsFragment : ViewBindingFragment<FragmentSearchTicketsBinding>(
 
             is SearchTicketsScreenState.OpenTab -> Log.d("@@@", searchTicketsScreenState.name)
 
-            is SearchTicketsScreenState.SearchState -> Log.d("@@@", "search")
+            is SearchTicketsScreenState.SearchState -> {
+                removeSearchTicketsFragmentListener.onRemoveFragment()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .remove(this)
+                    .replace(
+                        R.id.fragments_container,
+                        SelectedTownFragment.newInstance(
+                            searchTicketsScreenState.whereFrom,
+                            searchTicketsScreenState.where
+                        ),
+                        SelectedTownFragment.TAG_SELECTED_TOWN_FRAGMENT
+                    )
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+
             is SearchTicketsScreenState.WhereState -> binding.whereEditText.setText(
                 searchTicketsScreenState.where
             )
@@ -115,7 +144,7 @@ class SearchTicketsFragment : ViewBindingFragment<FragmentSearchTicketsBinding>(
     }
 
     companion object {
-        const val TAG_SEARCH_BOTTOM_SHEET_DIALOG_FRAGMENT = "TagSearchBottomSheetDialogFragment"
+        const val TAG_SEARCH_TICKETS_FRAGMENT = "TagSearchTicketsFragment"
 
         const val KEY_WHERE_FROM = "KeyWhereFrom"
 
