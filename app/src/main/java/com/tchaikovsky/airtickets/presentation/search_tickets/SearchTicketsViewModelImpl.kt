@@ -46,7 +46,7 @@ class SearchTicketsViewModelImpl @Inject constructor(private val repository: Air
             singleEventLiveData.value = SearchTicketsScreenState.Error(NO_SELECTED_WHERE)
         else
             singleEventLiveData.value =
-                SearchTicketsScreenState.SearchState("$whereFrom-$where", "25 февраля")
+                SearchTicketsScreenState.SearchState(whereFrom, where)
     }
 
     override fun onClickClear() {

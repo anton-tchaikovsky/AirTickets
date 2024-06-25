@@ -8,8 +8,10 @@ sealed interface SelectedTownScreenState {
 
     data object ShowCalendar : SelectedTownScreenState
 
-    data class ViewAllTicketsState(val flight: String, val flightInfo: String) :
+    data class OpenViewAllTicketsState(val flight: String, val flightInfo: String) :
         SelectedTownScreenState
+
+    data class ChangeDepartureDateState(val date: String): SelectedTownScreenState
 
     class Error(val message: String) : SelectedTownScreenState
 }

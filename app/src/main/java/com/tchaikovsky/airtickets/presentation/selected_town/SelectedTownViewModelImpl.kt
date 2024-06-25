@@ -8,9 +8,12 @@ import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.domain.entity.tickets_offers.TicketsOffer
 import com.tchaikovsky.airtickets.domain.repository.AirTicketsRepository
 import com.tchaikovsky.airtickets.utility.SingleEventLiveData
+import com.tchaikovsky.airtickets.utility.mapCalendarDayOfWeekToDayUI
+import com.tchaikovsky.airtickets.utility.mapCalendarMonthToMonthUI
 import com.tchaikovsky.airtickets.utility.toStringForUI
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import javax.inject.Inject
 
 class SelectedTownViewModelImpl @Inject constructor(private val repository: AirTicketsRepository) :
@@ -27,12 +30,18 @@ class SelectedTownViewModelImpl @Inject constructor(private val repository: AirT
                 SelectedTownScreenState.Error((error.message ?: DEFAULT_ERROR))
         }
 
+    private var selectedDate = Calendar.getInstance()
+
     init {
         viewModelScope.launch(exceptionHandler) {
-            ticketsOfferLiveData.value = repository.getTicketsOffers().ticketsOffers.subList(0,3).mapIndexed{ index, it ->
-                mapTicketsOfferToTicketsOfferUI(index, it)
-            }
+            ticketsOfferLiveData.value =
+                repository.getTicketsOffers().ticketsOffers.subList(0, 3).mapIndexed { index, it ->
+                    mapTicketsOfferToTicketsOfferUI(index, it)
+                }
         }
+        singleEventLiveData.value = SelectedTownScreenState.ChangeDepartureDateState(
+            mapCalendarToDateUI(selectedDate)
+        )
     }
 
     override fun getTicketsOfferLiveData(): LiveData<List<TicketsOfferUI>> = ticketsOfferLiveData
@@ -48,7 +57,7 @@ class SelectedTownViewModelImpl @Inject constructor(private val repository: AirT
         singleEventLiveData.value = SelectedTownScreenState.ReverseWhereFromAndFrom
     }
 
-    override fun onClickDate() {
+    override fun onClickDepartureDate() {
         singleEventLiveData.value = SelectedTownScreenState.ShowCalendar
     }
 
@@ -59,10 +68,29 @@ class SelectedTownViewModelImpl @Inject constructor(private val repository: AirT
             singleEventLiveData.value = SelectedTownScreenState.Error(NO_SELECTED_WHERE)
         else
             singleEventLiveData.value =
-                SelectedTownScreenState.ViewAllTicketsState(whereFrom, where)
+                SelectedTownScreenState.OpenViewAllTicketsState(
+                    "$whereFrom-$where",
+                    mapCalendarToDateUI(selectedDate)
+                )
     }
 
-    private fun mapTicketsOfferToTicketsOfferUI(index: Int, ticketsOffer: TicketsOffer): TicketsOfferUI =
+    override fun onChangeDepartureDate(date: Long) {
+        selectedDate = Calendar.getInstance().apply { timeInMillis = date }
+        singleEventLiveData.value = SelectedTownScreenState.ChangeDepartureDateState(
+            mapCalendarToDateUI(selectedDate)
+        )
+    }
+
+    private fun mapCalendarToDateUI(calendar: Calendar) =
+        calendar.let {
+            " ${it.get(Calendar.DAY_OF_MONTH)} ${mapCalendarMonthToMonthUI(it.get(Calendar.MONTH))}, " +
+                    mapCalendarDayOfWeekToDayUI(it.get(Calendar.DAY_OF_WEEK))
+        }
+
+    private fun mapTicketsOfferToTicketsOfferUI(
+        index: Int,
+        ticketsOffer: TicketsOffer
+    ): TicketsOfferUI =
         TicketsOfferUI(
             idImage = when (index) {
                 0 -> R.drawable.red_circle

@@ -1,7 +1,6 @@
 package com.tchaikovsky.airtickets.presentation.selected_town
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -9,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.FragmentSelectedTownBinding
@@ -24,6 +24,17 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
 
     private val ticketsOfferAdapter: TicketsOffersAdapter by lazy {
         TicketsOffersAdapter()
+    }
+
+    private val datePicker: MaterialDatePicker<Long> by lazy {
+        MaterialDatePicker.Builder.datePicker()
+            .setTitleText(DEPARTURE_DATE)
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .build().apply {
+                addOnPositiveButtonClickListener {
+                    viewModel.onChangeDepartureDate(it)
+                }
+            }
     }
 
     private val viewModel: SelectedTownViewModel by lazy {
@@ -72,8 +83,12 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
                 }
             }
 
-            SelectedTownScreenState.ShowCalendar -> Log.d("@@@", "calendar")
-            is SelectedTownScreenState.ViewAllTicketsState -> requireActivity().supportFragmentManager
+            SelectedTownScreenState.ShowCalendar -> datePicker.show(
+                requireActivity().supportFragmentManager,
+                TAG_DATE_PICKER
+            )
+
+            is SelectedTownScreenState.OpenViewAllTicketsState -> requireActivity().supportFragmentManager
                 .beginTransaction()
                 .replace(
                     R.id.fragments_container,
@@ -85,6 +100,9 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
                 )
                 .addToBackStack("")
                 .commitAllowingStateLoss()
+
+            is SelectedTownScreenState.ChangeDepartureDateState -> binding.dateFab.text =
+                selectedTownScreenState.date
         }
     }
 
@@ -94,7 +112,7 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
 
     private fun initTabs() {
         with(binding) {
-            dateFab.setOnClickListener { viewModel.onClickDate() }
+            dateFab.setOnClickListener { viewModel.onClickDepartureDate() }
             viewAllTicketsFab.setOnClickListener {
                 viewModel.onClickViewAllTickets(
                     whereFromEditText.text.toString(),
@@ -133,9 +151,13 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
     companion object {
         const val TAG_SELECTED_TOWN_FRAGMENT = "TagSelectedTownFragment"
 
+        private const val TAG_DATE_PICKER = "TagDatePicker"
+
         private const val KEY_WHERE_FROM = "KeyWhereFrom"
 
         private const val KEY_WHERE = "KeyWhere"
+
+        private const val DEPARTURE_DATE = "Выберите дату отправления"
 
         @JvmStatic
         fun newInstance(whereFrom: String?, where: String?) =

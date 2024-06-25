@@ -12,8 +12,10 @@ interface SelectedTownViewModel {
 
     fun onClickReverse()
 
-    fun onClickDate()
+    fun onClickDepartureDate()
 
     fun onClickViewAllTickets(whereFrom: String, where: String)
+
+    fun onChangeDepartureDate(date: Long)
 
 }
