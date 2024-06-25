@@ -5,7 +5,7 @@ import com.tchaikovsky.airtickets.domain.entity.Price
 
 data class Ticket(
     val arrival: Arrival,
-    val badge: String,
+    val badge: String?,
     val company: String,
     val departure: Departure,
     @field:SerializedName("hand_luggage") val handLuggage: HandLuggage,

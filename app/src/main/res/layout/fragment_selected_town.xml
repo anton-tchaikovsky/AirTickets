@@ -177,7 +177,6 @@
                 style="@style/SloganTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/middle_margin"
                 android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/middle_margin"
                 android:text="@string/direct_flights"

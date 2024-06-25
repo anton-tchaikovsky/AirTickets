@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tchaikovsky.airtickets.AirTicketsApp
+import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.FragmentSelectedTownBinding
 import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsFragment
 import com.tchaikovsky.airtickets.presentation.selected_town.tickets_offers_list.TicketsOffersAdapter
+import com.tchaikovsky.airtickets.presentation.view_all_tickets.ViewAllTicketsFragment
 import com.tchaikovsky.airtickets.utility.ViewBindingFragment
 import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
 
@@ -71,10 +73,18 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
             }
 
             SelectedTownScreenState.ShowCalendar -> Log.d("@@@", "calendar")
-            is SelectedTownScreenState.ViewAllTicketsState -> Log.d(
-                "@@@",
-                "${selectedTownScreenState.whereFrom} ${selectedTownScreenState.where}"
-            )
+            is SelectedTownScreenState.ViewAllTicketsState -> requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(
+                    R.id.fragments_container,
+                    ViewAllTicketsFragment.newInstance(
+                        selectedTownScreenState.flight,
+                        selectedTownScreenState.flightInfo
+                    ),
+                    ViewAllTicketsFragment.TAG_VIEW_ALL_TICKETS_FRAGMENT
+                )
+                .addToBackStack("")
+                .commitAllowingStateLoss()
         }
     }
 
@@ -112,7 +122,7 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
                 DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL).apply {
                     ContextCompat.getDrawable(
                         requireContext(),
-                        com.tchaikovsky.airtickets.R.drawable.decorator_horizontal
+                        R.drawable.decorator_horizontal
                     )
                         ?.let { setDrawable(it) }
                 }
