@@ -2,7 +2,6 @@ package com.tchaikovsky.airtickets.presentation.search_tickets
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -15,6 +14,7 @@ import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.FragmentSearchTicketsBinding
 import com.tchaikovsky.airtickets.presentation.air_tickets.AirTicketsFragment.Companion.ERROR_ACTIVITY_LISTENER
 import com.tchaikovsky.airtickets.presentation.main_menu.RemoveSearchTicketsFragmentListener
+import com.tchaikovsky.airtickets.presentation.mock.MockFragment
 import com.tchaikovsky.airtickets.presentation.search_tickets.popular_list.PopularsAdapter
 import com.tchaikovsky.airtickets.presentation.selected_town.SelectedTownFragment
 import com.tchaikovsky.airtickets.utility.ViewBindingFragment
@@ -115,7 +115,18 @@ class SearchTicketsFragment : ViewBindingFragment<FragmentSearchTicketsBinding>(
                 Toast.LENGTH_SHORT
             ).show()
 
-            is SearchTicketsScreenState.OpenTab -> Log.d("@@@", searchTicketsScreenState.name)
+            is SearchTicketsScreenState.OpenTab -> {
+                when (searchTicketsScreenState) {
+                    SearchTicketsScreenState.OpenTab.DIFFICULT_ROUTER -> {
+                        openMockFragment(
+                            MockFragment.TAG_DIFFICULT_ROUTER
+                        )
+                    }
+
+                    SearchTicketsScreenState.OpenTab.WEEKENDS -> openMockFragment(MockFragment.TAG_WEEKENDS)
+                    SearchTicketsScreenState.OpenTab.HOT_TICKETS -> openMockFragment(MockFragment.TAG_HOT_TICKETS)
+                }
+            }
 
             is SearchTicketsScreenState.SearchState -> {
                 removeSearchTicketsFragmentListener.onRemoveFragment()
@@ -141,6 +152,15 @@ class SearchTicketsFragment : ViewBindingFragment<FragmentSearchTicketsBinding>(
 
     private fun renderPopulars(populars: List<PopularUI>) {
         popularsAdapter.setPopulars(populars)
+    }
+
+    private fun openMockFragment(tag: String) {
+        removeSearchTicketsFragmentListener.onRemoveFragment()
+        requireActivity().supportFragmentManager.beginTransaction()
+            .remove(this)
+            .replace(R.id.fragments_container, MockFragment.newInstance(), tag)
+            .addToBackStack("")
+            .commitAllowingStateLoss()
     }
 
     companion object {

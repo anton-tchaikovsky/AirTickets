@@ -11,6 +11,7 @@ import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.ActivityMainMenuBinding
 import com.tchaikovsky.airtickets.presentation.air_tickets.AirTicketsFragment
+import com.tchaikovsky.airtickets.presentation.mock.MockFragment
 import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsFragment
 import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
 
@@ -101,6 +102,9 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
                 else -> false
             }
         }
+        binding.mainMenuNavigationView.setOnItemReselectedListener {
+            // двойной клик не обрабатываем
+        }
     }
 
     private fun renderMainMenuScreen(mainMenuItem: MainMenuItem) {
@@ -111,29 +115,13 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
                 Toast.LENGTH_SHORT
             ).show()
 
-            MainMenuItem.HOTELS -> Toast.makeText(
-                this,
-                mainMenuItem.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
+            MainMenuItem.HOTELS -> openMockFragment(MockFragment.TAG_HOTELS)
 
-            MainMenuItem.SHORT_WAY -> Toast.makeText(
-                this,
-                mainMenuItem.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
+            MainMenuItem.SHORT_WAY -> openMockFragment(MockFragment.TAG_SHORT_WAY)
 
-            MainMenuItem.SUBSCRIPTION -> Toast.makeText(
-                this,
-                mainMenuItem.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
+            MainMenuItem.SUBSCRIPTION -> openMockFragment(MockFragment.TAG_SUBSCRIPTION)
 
-            MainMenuItem.PROFILE -> Toast.makeText(
-                this,
-                mainMenuItem.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
+            MainMenuItem.PROFILE -> openMockFragment(MockFragment.TAG_PROFILE)
         }
     }
 
@@ -147,5 +135,12 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
                     AirTicketsFragment.AIR_TICKETS_FRAGMENT_TAG
                 )
                 .commitAllowingStateLoss()
+    }
+
+    private fun openMockFragment(tag: String){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragments_container, MockFragment.newInstance(), tag)
+            .addToBackStack("")
+            .commitAllowingStateLoss()
     }
 }

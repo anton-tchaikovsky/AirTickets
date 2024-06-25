@@ -61,11 +61,13 @@ class ViewAllTicketsFragment : ViewBindingFragment<FragmentViewAllTicketsBinding
 
     private fun renderData(allTicketsScreenState: ViewAllTicketsScreenState) {
         when (allTicketsScreenState) {
-            is ViewAllTicketsScreenState.Error -> Toast.makeText(
+            is ViewAllTicketsScreenState.Error -> {
+                binding.toggleButton.visibility = View.INVISIBLE
+                Toast.makeText(
                 requireContext(),
                 allTicketsScreenState.message,
                 Toast.LENGTH_SHORT
-            ).show()
+            ).show()}
         }
     }
 
