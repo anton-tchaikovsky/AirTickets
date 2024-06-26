@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_black"
+    android:clickable="true"
+    android:focusable="true">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/search_tickets_container_card_view"
+        style="@style/SearchTicketScreenCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/small_padding">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/departure_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/stroke_gray"
+                android:contentDescription="@string/search"
+                android:src="@drawable/departure"
+                app:layout_constraintBottom_toTopOf="@id/line_view"
+                app:layout_constraintEnd_toEndOf="@id/search_button"
+                app:layout_constraintStart_toStartOf="@id/search_button"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ImageContrastCheck" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/middle_margin"
+                android:backgroundTint="@color/stroke_gray"
+                android:contentDescription="@string/search"
+                android:src="@drawable/search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line_view"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <View
+                android:id="@+id/line_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_width"
+                android:layout_marginHorizontal="@dimen/middle_margin"
+                android:background="@color/gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/where_from_edit_text"
+                style="@style/SearchEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/middle_margin"
+                android:background="@color/stroke_gray"
+                android:hint="@string/default_where_from"
+                app:layout_constraintBottom_toTopOf="@id/line_view"
+                app:layout_constraintEnd_toEndOf="@id/line_view"
+                app:layout_constraintStart_toStartOf="@id/where_edit_text"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/where_edit_text"
+                style="@style/SearchEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/middle_margin"
+                android:background="@color/stroke_gray"
+                android:hint="@string/default_where"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/search_button"
+                app:layout_constraintTop_toBottomOf="@id/line_view"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/close_button"
+                android:layout_width="@dimen/small_button_size"
+                android:layout_height="@dimen/small_button_size"
+                android:layout_marginHorizontal="@dimen/big_margin"
+                android:backgroundTint="@color/stroke_gray"
+                android:contentDescription="@string/close"
+                android:src="@drawable/baseline_close_24"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line_view"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/difficult_route_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/big_margin"
+        android:backgroundTint="@color/light_black"
+        android:contentDescription="@string/difficult_route"
+        android:src="@drawable/difficult_route"
+        app:layout_constraintEnd_toStartOf="@id/anywhere_button"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_tickets_container_card_view" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/anywhere_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_margin"
+        android:backgroundTint="@color/light_black"
+        android:contentDescription="@string/anywhere"
+        android:src="@drawable/anywhere"
+        app:layout_constraintEnd_toStartOf="@id/weekends_button"
+        app:layout_constraintStart_toEndOf="@id/difficult_route_image_button"
+        app:layout_constraintTop_toBottomOf="@id/search_tickets_container_card_view" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/weekends_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_margin"
+        android:backgroundTint="@color/light_black"
+        android:contentDescription="@string/weekends"
+        android:src="@drawable/weekends"
+        app:layout_constraintEnd_toStartOf="@id/hot_tickets_button"
+        app:layout_constraintStart_toEndOf="@id/anywhere_button"
+        app:layout_constraintTop_toBottomOf="@id/search_tickets_container_card_view" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/hot_tickets_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/big_margin"
+        android:backgroundTint="@color/light_black"
+        android:contentDescription="@string/hot_tickets"
+        android:src="@drawable/hot_tickets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/weekends_button"
+        app:layout_constraintTop_toBottomOf="@id/search_tickets_container_card_view" />
+
+    <TextView
+        android:id="@+id/difficult_route_txt_view"
+        style="@style/TabTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/difficult_route"
+        app:layout_constraintEnd_toEndOf="@id/difficult_route_image_button"
+        app:layout_constraintStart_toStartOf="@id/difficult_route_image_button"
+        app:layout_constraintTop_toBottomOf="@id/difficult_route_image_button" />
+
+    <TextView
+        style="@style/TabTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/anywhere"
+        app:layout_constraintEnd_toEndOf="@id/anywhere_button"
+        app:layout_constraintStart_toStartOf="@id/anywhere_button"
+        app:layout_constraintTop_toBottomOf="@id/anywhere_button" />
+
+    <TextView
+        style="@style/TabTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/weekends"
+        app:layout_constraintEnd_toEndOf="@id/weekends_button"
+        app:layout_constraintStart_toStartOf="@id/weekends_button"
+        app:layout_constraintTop_toBottomOf="@id/weekends_button" />
+
+    <TextView
+        style="@style/TabTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hot_tickets"
+        app:layout_constraintEnd_toEndOf="@id/hot_tickets_button"
+        app:layout_constraintStart_toStartOf="@id/hot_tickets_button"
+        app:layout_constraintTop_toBottomOf="@id/hot_tickets_button" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/popular_container_card_view"
+        style="@style/SearchTicketScreenCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/big_margin"
+        app:layout_constraintTop_toBottomOf="@id/difficult_route_txt_view">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popular_recycle_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/middle_margin"
+            app:layout_constraintTop_toBottomOf="@id/slogan_text_view" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/middle_margin"
+    android:background="@color/stroke_gray">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/circle_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:src="@drawable/red_circle" />
+
+    <TextView
+        android:id="@+id/name_company_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small_text_size"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@id/circle_image_view"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="Уральские авиалинии" />
+
+    <TextView
+        android:id="@+id/price_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/small_text_size"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:ignore="TextContrastCheck"
+        tool:text="2 350 р." />
+
+    <TextView
+        android:id="@+id/times_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/middle_margin"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/circle_image_view"
+        app:layout_constraintTop_toBottomOf="@id/name_company_text_view"
+        tool:ignore="TextContrastCheck"
+        tool:text="11:48 13:56" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
