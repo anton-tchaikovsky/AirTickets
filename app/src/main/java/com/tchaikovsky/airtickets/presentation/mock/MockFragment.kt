@@ -3,7 +3,7 @@ package com.tchaikovsky.airtickets.presentation.mock
 import android.os.Bundle
 import android.view.View
 import com.tchaikovsky.airtickets.databinding.FragmentMockBinding
-import com.tchaikovsky.airtickets.utility.ViewBindingFragment
+import com.tchaikovsky.utils.ViewBindingFragment
 
 class MockFragment : ViewBindingFragment<FragmentMockBinding>(
     FragmentMockBinding::inflate

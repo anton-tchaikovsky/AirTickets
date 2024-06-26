@@ -7,12 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.tchaikovsky.airtickets.data.resurce_provider.FotoEnum
 import com.tchaikovsky.airtickets.data.resurce_provider.ResourcesProvider
 import com.tchaikovsky.airtickets.data.resurce_provider.StringEnum
-import com.tchaikovsky.airtickets.utility.SingleEventLiveData
-import com.tchaikovsky.airtickets.utility.mapCalendarDayOfWeekToDayUI
-import com.tchaikovsky.airtickets.utility.mapCalendarMonthToMonthUI
-import com.tchaikovsky.airtickets.utility.toStringForUI
 import com.tchaikovsky.domain.entity.tickets_offers.TicketsOffer
 import com.tchaikovsky.domain.repository.AirTicketsRepository
+import com.tchaikovsky.utils.SingleEventLiveData
+import com.tchaikovsky.utils.mapCalendarDayOfWeekToDayUI
+import com.tchaikovsky.utils.mapCalendarMonthToMonthUI
+import com.tchaikovsky.utils.toStringForUI
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import java.util.Calendar

@@ -14,7 +14,7 @@ import com.tchaikovsky.airtickets.databinding.ActivityMainMenuBinding
 import com.tchaikovsky.airtickets.presentation.air_tickets.AirTicketsFragment
 import com.tchaikovsky.airtickets.presentation.mock.MockFragment
 import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsFragment
-import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
+import com.tchaikovsky.utils.viewModelProviderFactoryOf
 
 class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchTicketsFragmentListener {
 

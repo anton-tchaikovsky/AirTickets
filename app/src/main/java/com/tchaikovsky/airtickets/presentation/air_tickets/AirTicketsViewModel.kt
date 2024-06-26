@@ -1,7 +1,7 @@
 package com.tchaikovsky.airtickets.presentation.air_tickets
 
 import androidx.lifecycle.LiveData
-import com.tchaikovsky.airtickets.utility.SingleEventLiveData
+import com.tchaikovsky.utils.SingleEventLiveData
 
 interface AirTicketsViewModel {
 

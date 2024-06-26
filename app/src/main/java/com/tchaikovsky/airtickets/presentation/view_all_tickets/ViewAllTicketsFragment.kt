@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.databinding.FragmentViewAllTicketsBinding
 import com.tchaikovsky.airtickets.presentation.view_all_tickets.ticketsList.TicketsAdapter
-import com.tchaikovsky.airtickets.utility.ViewBindingFragment
-import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
+import com.tchaikovsky.utils.ViewBindingFragment
+import com.tchaikovsky.utils.viewModelProviderFactoryOf
 
 class ViewAllTicketsFragment : ViewBindingFragment<FragmentViewAllTicketsBinding>(
     FragmentViewAllTicketsBinding::inflate

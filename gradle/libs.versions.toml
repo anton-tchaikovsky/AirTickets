@@ -12,6 +12,7 @@ constraintlayout = "2.1.4"
 retrofit = "2.9.0"
 dagger = "2.46"
 android-lifecycle = "2.8.2"
+engageCore = "1.5.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,6 +28,7 @@ retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-kapt = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
 android-lifecycle = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "android-lifecycle" }
+engage-core = { group = "com.google.android.engage", name = "engage-core", version.ref = "engageCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

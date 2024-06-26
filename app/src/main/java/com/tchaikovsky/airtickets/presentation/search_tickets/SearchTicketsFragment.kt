@@ -17,8 +17,8 @@ import com.tchaikovsky.airtickets.presentation.main_menu.RemoveSearchTicketsFrag
 import com.tchaikovsky.airtickets.presentation.mock.MockFragment
 import com.tchaikovsky.airtickets.presentation.search_tickets.popular_list.PopularsAdapter
 import com.tchaikovsky.airtickets.presentation.selected_town.SelectedTownFragment
-import com.tchaikovsky.airtickets.utility.ViewBindingFragment
-import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
+import com.tchaikovsky.utils.ViewBindingFragment
+import com.tchaikovsky.utils.viewModelProviderFactoryOf
 
 class SearchTicketsFragment : ViewBindingFragment<FragmentSearchTicketsBinding>(
     FragmentSearchTicketsBinding::inflate

@@ -1,7 +1,7 @@
 package com.tchaikovsky.airtickets.presentation.selected_town
 
 import androidx.lifecycle.LiveData
-import com.tchaikovsky.airtickets.utility.SingleEventLiveData
+import com.tchaikovsky.utils.SingleEventLiveData
 
 interface SelectedTownViewModel {
     fun getTicketsOfferLiveData(): LiveData<List<TicketsOfferUI>>

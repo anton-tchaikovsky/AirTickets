@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.utility
+package com.tchaikovsky.utils
 
 import android.util.Log
 import androidx.annotation.MainThread

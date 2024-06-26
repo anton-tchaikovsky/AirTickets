@@ -14,8 +14,8 @@ import com.tchaikovsky.airtickets.R
 import com.tchaikovsky.airtickets.databinding.FragmentAirTicketsBinding
 import com.tchaikovsky.airtickets.presentation.air_tickets.offers_list.OffersAdapter
 import com.tchaikovsky.airtickets.presentation.main_menu.PreferencesListener
-import com.tchaikovsky.airtickets.utility.ViewBindingFragment
-import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
+import com.tchaikovsky.utils.ViewBindingFragment
+import com.tchaikovsky.utils.viewModelProviderFactoryOf
 
 class AirTicketsFragment :
     ViewBindingFragment<FragmentAirTicketsBinding>(FragmentAirTicketsBinding::inflate) {

@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.utility
+package com.tchaikovsky.utils
 
 import com.tchaikovsky.domain.entity.Price
 

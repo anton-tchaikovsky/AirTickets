@@ -18,8 +18,8 @@ import com.tchaikovsky.airtickets.databinding.FragmentSelectedTownBinding
 import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsFragment
 import com.tchaikovsky.airtickets.presentation.selected_town.tickets_offers_list.TicketsOffersAdapter
 import com.tchaikovsky.airtickets.presentation.view_all_tickets.ViewAllTicketsFragment
-import com.tchaikovsky.airtickets.utility.ViewBindingFragment
-import com.tchaikovsky.airtickets.utility.viewModelProviderFactoryOf
+import com.tchaikovsky.utils.ViewBindingFragment
+import com.tchaikovsky.utils.viewModelProviderFactoryOf
 
 class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
     FragmentSelectedTownBinding::inflate
