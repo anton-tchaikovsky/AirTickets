@@ -7,14 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.tchaikovsky.airtickets.data.resurce_provider.FotoEnum
 import com.tchaikovsky.airtickets.data.resurce_provider.ResourcesProvider
 import com.tchaikovsky.airtickets.data.resurce_provider.StringEnum
-import com.tchaikovsky.airtickets.domain.entity.offers.Offer
-import com.tchaikovsky.airtickets.domain.repository.AirTicketsRepository
 import com.tchaikovsky.airtickets.utility.SingleEventLiveData
 import com.tchaikovsky.airtickets.utility.toStringForUI
+import com.tchaikovsky.domain.entity.offers.Offer
+import com.tchaikovsky.domain.repository.AirTicketsRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 class AirTicketsViewModelImpl @Inject constructor(
     private val repository: AirTicketsRepository,

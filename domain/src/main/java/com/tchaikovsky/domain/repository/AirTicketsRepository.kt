@@ -1,9 +1,9 @@
-package com.tchaikovsky.airtickets.domain.repository
+package com.tchaikovsky.domain.repository
 
-import com.tchaikovsky.airtickets.domain.entity.Popular
-import com.tchaikovsky.airtickets.domain.entity.offers.Offers
-import com.tchaikovsky.airtickets.domain.entity.tickets.Tickets
-import com.tchaikovsky.airtickets.domain.entity.tickets_offers.TicketsOffers
+import com.tchaikovsky.domain.entity.Popular
+import com.tchaikovsky.domain.entity.offers.Offers
+import com.tchaikovsky.domain.entity.tickets.Tickets
+import com.tchaikovsky.domain.entity.tickets_offers.TicketsOffers
 
 interface AirTicketsRepository {
     suspend fun getOffers(): Offers

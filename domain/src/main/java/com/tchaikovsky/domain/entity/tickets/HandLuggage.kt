@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.domain.entity.tickets
+package com.tchaikovsky.domain.entity.tickets
 
 import com.google.gson.annotations.SerializedName
 

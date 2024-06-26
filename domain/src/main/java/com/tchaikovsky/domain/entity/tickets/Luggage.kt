@@ -1,7 +1,7 @@
-package com.tchaikovsky.airtickets.domain.entity.tickets
+package com.tchaikovsky.domain.entity.tickets
 
 import com.google.gson.annotations.SerializedName
-import com.tchaikovsky.airtickets.domain.entity.Price
+import com.tchaikovsky.domain.entity.Price
 
 data class Luggage(
     @field:SerializedName("has_luggage") val hasLuggage: Boolean,

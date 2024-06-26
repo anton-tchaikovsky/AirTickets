@@ -1,8 +1,8 @@
 package com.tchaikovsky.airtickets.data.data_source.retrofit
 
-import com.tchaikovsky.airtickets.domain.entity.offers.Offers
-import com.tchaikovsky.airtickets.domain.entity.tickets.Tickets
-import com.tchaikovsky.airtickets.domain.entity.tickets_offers.TicketsOffers
+import com.tchaikovsky.domain.entity.offers.Offers
+import com.tchaikovsky.domain.entity.tickets.Tickets
+import com.tchaikovsky.domain.entity.tickets_offers.TicketsOffers
 import retrofit2.http.GET
 
 interface AirTicketsRetrofitApi {

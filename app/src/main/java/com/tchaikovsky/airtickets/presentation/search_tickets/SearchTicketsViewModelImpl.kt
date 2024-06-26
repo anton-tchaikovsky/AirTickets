@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.tchaikovsky.airtickets.data.resurce_provider.FotoEnum
 import com.tchaikovsky.airtickets.data.resurce_provider.ResourcesProvider
 import com.tchaikovsky.airtickets.data.resurce_provider.StringEnum
-import com.tchaikovsky.airtickets.domain.entity.Popular
-import com.tchaikovsky.airtickets.domain.repository.AirTicketsRepository
 import com.tchaikovsky.airtickets.utility.SingleEventLiveData
+import com.tchaikovsky.domain.entity.Popular
+import com.tchaikovsky.domain.repository.AirTicketsRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject

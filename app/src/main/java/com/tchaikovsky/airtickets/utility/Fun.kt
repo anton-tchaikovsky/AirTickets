@@ -1,6 +1,6 @@
 package com.tchaikovsky.airtickets.utility
 
-import com.tchaikovsky.airtickets.domain.entity.Price
+import com.tchaikovsky.domain.entity.Price
 
 fun Price.toStringForUI(): String {
     val stringBuilder = StringBuilder(this.value.toString())

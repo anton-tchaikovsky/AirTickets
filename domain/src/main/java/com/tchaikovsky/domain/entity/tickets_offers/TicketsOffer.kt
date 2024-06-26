@@ -1,7 +1,7 @@
-package com.tchaikovsky.airtickets.domain.entity.tickets_offers
+package com.tchaikovsky.domain.entity.tickets_offers
 
 import com.google.gson.annotations.SerializedName
-import com.tchaikovsky.airtickets.domain.entity.Price
+import com.tchaikovsky.domain.entity.Price
 
 data class TicketsOffer(
     val id: Int,
