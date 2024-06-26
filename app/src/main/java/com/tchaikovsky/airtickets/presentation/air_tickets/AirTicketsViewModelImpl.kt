@@ -41,13 +41,13 @@ class AirTicketsViewModelImpl @Inject constructor(
     init {
         with(repository) {
             readPreferences().let {
-                val where = it.second
                 val whereFrom = it.first
+                val where = it.second
                 preferencesWhere = if (where.isNullOrBlank())
                     null
                 else
                     where
-                preferencesWhereFrom = if (where.isNullOrBlank())
+                preferencesWhereFrom = if (whereFrom.isNullOrBlank())
                     null
                 else
                     whereFrom
@@ -67,7 +67,6 @@ class AirTicketsViewModelImpl @Inject constructor(
         singleEventLiveData
 
     override fun onClickSearch(preferencesWhereFrom: String, preferencesWhere: String) {
-        updatePreference(preferencesWhereFrom, preferencesWhere)
         singleEventLiveData.value =
             AirTicketsScreenState.PreferencesState(preferencesWhereFrom, preferencesWhere)
     }
@@ -77,8 +76,8 @@ class AirTicketsViewModelImpl @Inject constructor(
     }
 
     private fun updatePreference(preferencesWhereFrom: String, preferencesWhere: String) {
-        this.preferencesWhere = preferencesWhere
         this.preferencesWhereFrom = preferencesWhereFrom
+        this.preferencesWhere = preferencesWhere
         repository.savePreferences(preferencesWhereFrom to preferencesWhere)
     }
 

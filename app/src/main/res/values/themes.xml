@@ -5,5 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.AirTickets" parent="Base.Theme.AirTickets" />
+    <style name="Theme.AirTickets" parent="Base.Theme.AirTickets" >
+        <item name="android:windowBackground">@color/black</item>
+    </style>
 </resources>

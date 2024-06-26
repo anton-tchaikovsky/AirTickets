@@ -31,8 +31,8 @@
     <string name="slash">/</string>
     <string name="without_transfers">Без пересадок</string>
     <string name="default_error">Default error</string>
-    <string name="not_selected_where">Не выбрано место отправления</string>
-    <string name="not_selected_where_from">Не выбрано место назначения</string>
+    <string name="not_selected_where">Не выбрано место назначения</string>
+    <string name="not_selected_where_from">Не выбрано место отправления</string>
     <string name="flight">%s-%s</string>
     <string name="time">%s:%s</string>
     <string name="flight_time">%sч. %sм.</string>

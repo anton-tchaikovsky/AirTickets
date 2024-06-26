@@ -12,6 +12,7 @@
         android:layout_width="@dimen/large_image_size"
         android:layout_height="@dimen/large_image_size"
         tool:src="@drawable/first_popular"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/SmallRounderImageView"
@@ -22,19 +23,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/middle_margin"
+        android:layout_marginBottom="@dimen/small_margin"
         android:textColor="@color/white"
         android:textSize="@dimen/middle_text_size"
+        app:layout_constraintBottom_toTopOf="@id/popular_text_view"
         app:layout_constraintStart_toEndOf="@id/popular_image_view"
         app:layout_constraintTop_toTopOf="parent"
         tool:text="Стамбул" />
 
     <TextView
+        android:id="@+id/popular_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/middle_margin"
         android:text="@string/popular"
         android:textColor="@color/drag_handle_gray"
         android:textSize="@dimen/small_text_size"
+        app:layout_constraintTop_toBottomOf="@id/town_text_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/popular_image_view"
         tool:ignore="TextContrastCheck" />
