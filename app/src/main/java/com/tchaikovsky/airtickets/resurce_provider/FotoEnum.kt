@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.data.resurce_provider
+package com.tchaikovsky.airtickets.resurce_provider
 
 import com.tchaikovsky.airtickets.R
 

@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.data.preferences
+package com.tchaikovsky.data.preferences
 
 interface SearchPreferences {
     fun readWhere(): String?

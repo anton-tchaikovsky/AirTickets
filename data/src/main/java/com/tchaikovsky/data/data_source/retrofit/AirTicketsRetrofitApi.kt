@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.data.data_source.retrofit
+package com.tchaikovsky.data.data_source.retrofit
 
 import com.tchaikovsky.domain.entity.offers.Offers
 import com.tchaikovsky.domain.entity.tickets.Tickets

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tchaikovsky.airtickets.data.resurce_provider.ResourcesProvider
-import com.tchaikovsky.airtickets.data.resurce_provider.StringEnum
+import com.tchaikovsky.airtickets.resurce_provider.ResourcesProvider
+import com.tchaikovsky.airtickets.resurce_provider.StringEnum
 import com.tchaikovsky.domain.entity.tickets.Ticket
 import com.tchaikovsky.domain.repository.AirTicketsRepository
 import com.tchaikovsky.utils.SingleEventLiveData

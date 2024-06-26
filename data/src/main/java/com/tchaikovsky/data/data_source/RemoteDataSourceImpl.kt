@@ -1,6 +1,6 @@
-package com.tchaikovsky.airtickets.data.data_source
+package com.tchaikovsky.data.data_source
 
-import com.tchaikovsky.airtickets.data.data_source.retrofit.AirTicketsRetrofitApi
+import com.tchaikovsky.data.data_source.retrofit.AirTicketsRetrofitApi
 import com.tchaikovsky.domain.entity.offers.Offers
 import com.tchaikovsky.domain.entity.tickets.Tickets
 import com.tchaikovsky.domain.entity.tickets_offers.TicketsOffers

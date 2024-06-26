@@ -1,7 +1,7 @@
-package com.tchaikovsky.airtickets.data.repository
+package com.tchaikovsky.data.repository
 
-import com.tchaikovsky.airtickets.data.data_source.RemoteDataSource
-import com.tchaikovsky.airtickets.data.preferences.SearchPreferences
+import com.tchaikovsky.data.data_source.RemoteDataSource
+import com.tchaikovsky.data.preferences.SearchPreferences
 import com.tchaikovsky.domain.entity.Popular
 import com.tchaikovsky.domain.entity.offers.Offers
 import com.tchaikovsky.domain.entity.tickets.Tickets

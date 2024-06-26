@@ -1,6 +1,6 @@
 package com.tchaikovsky.airtickets.di.modules
 
-import com.tchaikovsky.airtickets.data.repository.AirTicketsRepositoryImpl
+import com.tchaikovsky.data.repository.AirTicketsRepositoryImpl
 import com.tchaikovsky.domain.repository.AirTicketsRepository
 import dagger.Binds
 import dagger.Module

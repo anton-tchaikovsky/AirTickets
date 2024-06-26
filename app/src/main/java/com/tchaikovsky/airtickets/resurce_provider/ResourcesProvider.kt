@@ -1,4 +1,4 @@
-package com.tchaikovsky.airtickets.data.resurce_provider
+package com.tchaikovsky.airtickets.resurce_provider
 
 interface ResourcesProvider {
     fun getString(string: StringEnum): String

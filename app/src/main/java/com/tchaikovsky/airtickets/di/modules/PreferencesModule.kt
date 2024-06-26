@@ -1,7 +1,7 @@
 package com.tchaikovsky.airtickets.di.modules
 
-import com.tchaikovsky.airtickets.data.preferences.SearchPreferences
-import com.tchaikovsky.airtickets.data.preferences.SearchPreferencesImpl
+import com.tchaikovsky.data.preferences.SearchPreferences
+import com.tchaikovsky.data.preferences.SearchPreferencesImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -10,5 +10,5 @@ import javax.inject.Singleton
 interface PreferencesModule {
     @Singleton
     @Binds
-    fun preferences(preferences: SearchPreferencesImpl):  SearchPreferences
+    fun preferences(preferences: SearchPreferencesImpl): SearchPreferences
 }
