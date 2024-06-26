@@ -12,8 +12,8 @@
         style="@style/SearchTicketScreenCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_margin"
         android:layout_marginHorizontal="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/large_margin"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,8 +74,8 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/reverse_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/middle_button_size"
+                android:layout_height="@dimen/middle_button_size"
                 android:layout_marginHorizontal="@dimen/big_margin"
                 android:backgroundTint="@color/stroke_gray"
                 android:contentDescription="@string/reverse"
@@ -88,8 +88,8 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/close_button"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="@dimen/middle_button_size"
+                android:layout_height="@dimen/middle_button_size"
                 android:layout_marginHorizontal="@dimen/big_margin"
                 android:backgroundTint="@color/stroke_gray"
                 android:contentDescription="@string/close"
@@ -123,7 +123,7 @@
                 android:id="@+id/conversely_fab"
                 style="@style/TabFabStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/normal_button_size"
                 android:layout_marginHorizontal="@dimen/small_margin"
                 android:text="@string/conversely"
                 app:icon="@drawable/plus" />
@@ -132,16 +132,15 @@
                 android:id="@+id/date_fab"
                 style="@style/TabFabStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/normal_button_size"
                 android:layout_marginHorizontal="@dimen/small_margin"
-                tools:text="24 фев, сб"
-                 />
+                tools:text="24 фев, сб" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/ticket_fab"
                 style="@style/TabFabStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/normal_button_size"
                 android:layout_marginHorizontal="@dimen/small_margin"
                 android:text="@string/economy"
                 app:icon="@drawable/people" />
@@ -150,7 +149,7 @@
                 android:id="@+id/filters_fab"
                 style="@style/TabFabStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/normal_button_size"
                 android:layout_marginHorizontal="@dimen/small_margin"
                 android:text="@string/filters"
                 app:icon="@drawable/filters" />
@@ -180,7 +179,7 @@
                 android:layout_marginStart="@dimen/large_margin"
                 android:layout_marginTop="@dimen/middle_margin"
                 android:text="@string/direct_flights"
-                android:textSize="@dimen/title_text_size"
+                android:textSize="@dimen/large_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -199,7 +198,7 @@
                 android:layout_marginHorizontal="@dimen/middle_margin"
                 android:layout_marginVertical="@dimen/middle_margin"
                 android:text="@string/show_all"
-                android:textSize="@dimen/title_text_size"
+                android:textSize="@dimen/large_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,12 +214,12 @@
         style="@style/BlueFabStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_margin"
         android:layout_marginHorizontal="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/large_margin"
         android:text="@string/view_all_tickets"
-        app:layout_constraintTop_toBottomOf="@id/tickets_offer_container_card_view"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tickets_offer_container_card_view"
         tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

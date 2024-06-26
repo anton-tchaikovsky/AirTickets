@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tchaikovsky.airtickets.R
+import com.tchaikovsky.airtickets.data.resurce_provider.FotoEnum
+import com.tchaikovsky.airtickets.data.resurce_provider.ResourcesProvider
+import com.tchaikovsky.airtickets.data.resurce_provider.StringEnum
 import com.tchaikovsky.airtickets.domain.entity.Popular
 import com.tchaikovsky.airtickets.domain.repository.AirTicketsRepository
 import com.tchaikovsky.airtickets.utility.SingleEventLiveData
@@ -12,7 +14,10 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SearchTicketsViewModelImpl @Inject constructor(private val repository: AirTicketsRepository) :
+class SearchTicketsViewModelImpl @Inject constructor(
+    private val repository: AirTicketsRepository,
+    private val resourceProvider: ResourcesProvider
+) :
     SearchTicketsViewModel, ViewModel() {
 
     private val popularsLiveData: MutableLiveData<List<PopularUI>> = MutableLiveData()
@@ -23,7 +28,11 @@ class SearchTicketsViewModelImpl @Inject constructor(private val repository: Air
     private val exceptionHandler =
         CoroutineExceptionHandler { _, error ->
             singleEventLiveData.value =
-                SearchTicketsScreenState.Error((error.message ?: DEFAULT_ERROR))
+                SearchTicketsScreenState.Error(
+                    (error.message ?: resourceProvider.getString(
+                        StringEnum.DEFAULT_ERROR
+                    ))
+                )
         }
 
     init {
@@ -41,9 +50,11 @@ class SearchTicketsViewModelImpl @Inject constructor(private val repository: Air
 
     override fun onClickSearch(whereFrom: String, where: String) {
         if (whereFrom.isBlank())
-            singleEventLiveData.value = SearchTicketsScreenState.Error(NO_SELECTED_WHERE_FROM)
+            singleEventLiveData.value =
+                SearchTicketsScreenState.Error(resourceProvider.getString(StringEnum.NO_SELECTED_WHERE_FROM))
         else if (where.isBlank())
-            singleEventLiveData.value = SearchTicketsScreenState.Error(NO_SELECTED_WHERE)
+            singleEventLiveData.value =
+                SearchTicketsScreenState.Error(resourceProvider.getString(StringEnum.NO_SELECTED_WHERE))
         else
             singleEventLiveData.value =
                 SearchTicketsScreenState.SearchState(whereFrom, where)
@@ -57,7 +68,12 @@ class SearchTicketsViewModelImpl @Inject constructor(private val repository: Air
         singleEventLiveData.value =
             when (tab) {
                 Tab.DIFFICULT_ROUTER -> SearchTicketsScreenState.OpenTab.DIFFICULT_ROUTER
-                Tab.ANYWHERE -> SearchTicketsScreenState.WhereState(ANYWHERE)
+                Tab.ANYWHERE -> SearchTicketsScreenState.WhereState(
+                    resourceProvider.getString(
+                        StringEnum.ANYWHERE
+                    )
+                )
+
                 Tab.WEEKENDS -> SearchTicketsScreenState.OpenTab.WEEKENDS
                 Tab.HOT_TICKETS -> SearchTicketsScreenState.OpenTab.HOT_TICKETS
             }
@@ -70,21 +86,11 @@ class SearchTicketsViewModelImpl @Inject constructor(private val repository: Air
     private fun mapPopularToPopularUI(popular: Popular): PopularUI =
         PopularUI(
             idImage = when (popular.id) {
-                1 -> R.drawable.first_popular
-                2 -> R.drawable.second_popular
-                3 -> R.drawable.third_popular
-                else -> R.drawable.ic_launcher_foreground
+                1 -> resourceProvider.getFotoId(FotoEnum.FIRST_POPULAR)
+                2 -> resourceProvider.getFotoId(FotoEnum.SECOND_POPULAR)
+                3 -> resourceProvider.getFotoId(FotoEnum.THIRD_POPULAR)
+                else -> resourceProvider.getFotoId(FotoEnum.DEFAULT_FOTO)
             },
             town = popular.town
         )
-
-    companion object {
-        private const val DEFAULT_ERROR = "Default error"
-
-        private const val NO_SELECTED_WHERE_FROM = "Не выбрано место отправления"
-
-        private const val NO_SELECTED_WHERE = "Не выбрано место назначения"
-
-        private const val ANYWHERE = "Куда угодно"
-    }
 }

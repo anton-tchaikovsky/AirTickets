@@ -8,14 +8,14 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/offer_image_view"
-        android:layout_width="132dp"
-        android:layout_height="132dp"
-        tool:src="@drawable/first_foto"
+        android:layout_width="@dimen/big_image_size"
+        android:layout_height="@dimen/big_image_size"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/RounderImageView"
-        android:scaleType="centerCrop"/>
+        tool:src="@drawable/first_foto" />
 
     <TextView
         android:id="@+id/offer_title_text_view"
@@ -24,7 +24,7 @@
         android:layout_marginHorizontal="@dimen/middle_margin"
         android:layout_marginTop="@dimen/middle_margin"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/middle_text_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/offer_image_view"
@@ -37,7 +37,7 @@
         android:layout_marginHorizontal="@dimen/middle_margin"
         android:layout_marginTop="@dimen/middle_margin"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="@dimen/small_text_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/offer_title_text_view"
         tool:text="Будапешт" />
@@ -46,12 +46,11 @@
         android:id="@+id/offer_icon_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/middle_margin"
+        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/town_text_view"
-        android:layout_marginTop="@dimen/middle_margin"
-        app:srcCompat="@drawable/tickets"
-        android:tint="@color/white"
-        />
+        app:srcCompat="@drawable/tickets" />
 
     <TextView
         android:id="@+id/price_text_view"
@@ -60,10 +59,10 @@
         android:layout_marginHorizontal="@dimen/middle_margin"
         android:layout_marginStart="@dimen/small_margin"
         android:textColor="@color/white"
-        android:textSize="14sp"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintBottom_toBottomOf="@id/offer_icon_image_view"
         app:layout_constraintStart_toEndOf="@id/offer_icon_image_view"
         app:layout_constraintTop_toTopOf="@id/offer_icon_image_view"
-        app:layout_constraintBottom_toBottomOf="@id/offer_icon_image_view"
         tool:text="от 22 264 p." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

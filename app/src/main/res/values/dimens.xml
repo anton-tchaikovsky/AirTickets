@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="slogan_text_size">22sp</dimen>
-    <dimen name="title_text_size">20sp</dimen>
-    <dimen name="tab_text_size">14sp</dimen>
+    <dimen name="big_text_size">22sp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="middle_text_size">16sp</dimen>
+    <dimen name="small_text_size">14sp</dimen>
     <dimen name="big_margin">20dp</dimen>
     <dimen name="middle_margin">8dp</dimen>
     <dimen name="large_margin">16dp</dimen>
     <dimen name="small_margin">4dp</dimen>
     <dimen name="line_width">2dp</dimen>
     <dimen name="small_padding">8dp</dimen>
-
+    <dimen name="small_corner_size">8dp</dimen>
+    <dimen name="middle_corner_size">16dp</dimen>
+    <dimen name="big_stroke_width">8dp</dimen>
+    <dimen name="big_image_size">132dp</dimen>
+    <dimen name="large_image_size">40dp</dimen>
+    <dimen name="small_button_size">18dp</dimen>
+    <dimen name="middle_button_size">24dp</dimen>
+    <dimen name="normal_button_size">48dp</dimen>
+    <dimen name="toggle_button_size">40dp</dimen>
+    <dimen name="half_toggle_button_size">20dp</dimen>
+    <dimen name="badge_text_view_size">28dp</dimen>
+    <dimen name="half_text_view_size">14dp</dimen>
 </resources>

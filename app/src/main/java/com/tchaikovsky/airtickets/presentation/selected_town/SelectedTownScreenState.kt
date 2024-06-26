@@ -11,7 +11,5 @@ sealed interface SelectedTownScreenState {
     data class OpenViewAllTicketsState(val flight: String, val flightInfo: String) :
         SelectedTownScreenState
 
-    data class ChangeDepartureDateState(val date: String): SelectedTownScreenState
-
     class Error(val message: String) : SelectedTownScreenState
 }

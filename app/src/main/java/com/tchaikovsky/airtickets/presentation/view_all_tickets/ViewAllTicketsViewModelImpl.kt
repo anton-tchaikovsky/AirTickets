@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tchaikovsky.airtickets.data.resurce_provider.ResourcesProvider
+import com.tchaikovsky.airtickets.data.resurce_provider.StringEnum
 import com.tchaikovsky.airtickets.domain.entity.tickets.Ticket
 import com.tchaikovsky.airtickets.domain.repository.AirTicketsRepository
 import com.tchaikovsky.airtickets.utility.SingleEventLiveData
@@ -18,7 +20,10 @@ import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
 
-class ViewAllTicketsViewModelImpl @Inject constructor(private val repository: AirTicketsRepository) :
+class ViewAllTicketsViewModelImpl @Inject constructor(
+    private val repository: AirTicketsRepository,
+    private val resourceProvider: ResourcesProvider
+) :
     ViewAllTicketsViewModel, ViewModel() {
 
     private val ticketsLiveData: MutableLiveData<List<TicketUI>> = MutableLiveData()
@@ -28,7 +33,9 @@ class ViewAllTicketsViewModelImpl @Inject constructor(private val repository: Ai
 
     private val exceptionHandler = CoroutineExceptionHandler { _, error ->
         singleEventLiveData.value =
-            ViewAllTicketsScreenState.Error((error.message ?: DEFAULT_ERROR))
+            ViewAllTicketsScreenState.Error(
+                (error.message ?: resourceProvider.getString(StringEnum.DEFAULT_ERROR))
+            )
     }
 
     init {
@@ -45,7 +52,7 @@ class ViewAllTicketsViewModelImpl @Inject constructor(private val repository: Ai
         singleEventLiveData
 
     private fun mapTicketToTicketUI(ticket: Ticket): TicketUI {
-       val firstCalendar = convertTimeToCalendar(ticket.departure.date)
+        val firstCalendar = convertTimeToCalendar(ticket.departure.date)
         val secondCalendar = convertTimeToCalendar(ticket.arrival.date)
         return TicketUI(
             badge = ticket.badge,
@@ -67,20 +74,20 @@ class ViewAllTicketsViewModelImpl @Inject constructor(private val repository: Ai
     }
 
     private fun convertCalendarToTimeUI(calendar: Calendar) =
-        "${String.format(Locale.UK, "%02d", calendar.get(Calendar.HOUR_OF_DAY))}:${
+        String.format(
+            resourceProvider.getString(StringEnum.TIME),
+            String.format(Locale.UK, "%02d", calendar.get(Calendar.HOUR_OF_DAY)),
             String.format(Locale.UK, "%02d", calendar.get(Calendar.MINUTE))
-        }"
+        )
 
     private fun calculateFlightTimeUI(firstCalendar: Calendar, secondCalendar: Calendar): String {
-        val duration =  (secondCalendar.time.time - firstCalendar.time.time).milliseconds
+        val duration = (secondCalendar.time.time - firstCalendar.time.time).milliseconds
         return duration.toComponents { hours, minutes, _, _ ->
-            "${hours}ч. ${minutes}м."
+            String.format(resourceProvider.getString(StringEnum.FLIGHT_TIME), hours, minutes)
         }
     }
 
     companion object {
-        private const val DEFAULT_ERROR = "Default error"
-
         private const val TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
     }
 

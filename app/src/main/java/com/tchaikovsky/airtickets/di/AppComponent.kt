@@ -4,9 +4,9 @@ import android.content.Context
 import com.tchaikovsky.airtickets.AirTicketsApp
 import com.tchaikovsky.airtickets.di.airTicketsScreen.AirTicketsScreenSubcomponent
 import com.tchaikovsky.airtickets.di.modules.DataSourceModule
-import com.tchaikovsky.airtickets.di.modules.MainMenuModule
 import com.tchaikovsky.airtickets.di.modules.PreferencesModule
 import com.tchaikovsky.airtickets.di.modules.RepositoryModule
+import com.tchaikovsky.airtickets.di.modules.ResourcesProviderModule
 import com.tchaikovsky.airtickets.di.modules.RetrofitModule
 import com.tchaikovsky.airtickets.presentation.main_menu.MainMenuViewModelImpl
 import com.tchaikovsky.airtickets.presentation.search_tickets.SearchTicketsViewModelImpl
@@ -22,8 +22,8 @@ import javax.inject.Singleton
         RetrofitModule::class,
         DataSourceModule::class,
         RepositoryModule::class,
-        MainMenuModule::class,
-        PreferencesModule::class
+        PreferencesModule::class,
+        ResourcesProviderModule::class
     ]
 )
 interface AppComponent {
@@ -43,6 +43,7 @@ interface AppComponent {
 
     val viewAllTicketsViewModelImpl: ViewAllTicketsViewModelImpl
 
+    //реализован в целях практики
     fun airTicketsScreenSubcomponent(): AirTicketsScreenSubcomponent
 
     fun inject(app: AirTicketsApp)

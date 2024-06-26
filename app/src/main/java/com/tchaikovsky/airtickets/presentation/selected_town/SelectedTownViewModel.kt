@@ -8,6 +8,8 @@ interface SelectedTownViewModel {
 
     fun getSingleEventLiveData(): SingleEventLiveData<SelectedTownScreenState>
 
+    fun getDateLivData(): LiveData<String>
+
     fun onClickClear()
 
     fun onClickReverse()

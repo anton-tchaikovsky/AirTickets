@@ -11,7 +11,7 @@ class MockFragment : ViewBindingFragment<FragmentMockBinding>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.nameTextView.text =  this.tag
+        binding.nameTextView.text = this.tag
     }
 
     companion object {

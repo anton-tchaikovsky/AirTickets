@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tchaikovsky.airtickets.R
+import com.tchaikovsky.airtickets.data.resurce_provider.FotoEnum
+import com.tchaikovsky.airtickets.data.resurce_provider.ResourcesProvider
+import com.tchaikovsky.airtickets.data.resurce_provider.StringEnum
 import com.tchaikovsky.airtickets.domain.entity.tickets_offers.TicketsOffer
 import com.tchaikovsky.airtickets.domain.repository.AirTicketsRepository
 import com.tchaikovsky.airtickets.utility.SingleEventLiveData
@@ -16,10 +18,15 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import javax.inject.Inject
 
-class SelectedTownViewModelImpl @Inject constructor(private val repository: AirTicketsRepository) :
+class SelectedTownViewModelImpl @Inject constructor(
+    private val repository: AirTicketsRepository,
+    private val resourceProvider: ResourcesProvider
+) :
     SelectedTownViewModel, ViewModel() {
 
     private val ticketsOfferLiveData: MutableLiveData<List<TicketsOfferUI>> = MutableLiveData()
+
+    private val dateLiveData: MutableLiveData<String> = MutableLiveData()
 
     private val singleEventLiveData: SingleEventLiveData<SelectedTownScreenState> =
         SingleEventLiveData()
@@ -27,7 +34,11 @@ class SelectedTownViewModelImpl @Inject constructor(private val repository: AirT
     private val exceptionHandler =
         CoroutineExceptionHandler { _, error ->
             singleEventLiveData.value =
-                SelectedTownScreenState.Error((error.message ?: DEFAULT_ERROR))
+                SelectedTownScreenState.Error(
+                    (error.message ?: resourceProvider.getString(
+                        StringEnum.DEFAULT_ERROR
+                    ))
+                )
         }
 
     private var selectedDate = Calendar.getInstance()
@@ -39,15 +50,15 @@ class SelectedTownViewModelImpl @Inject constructor(private val repository: AirT
                     mapTicketsOfferToTicketsOfferUI(index, it)
                 }
         }
-        singleEventLiveData.value = SelectedTownScreenState.ChangeDepartureDateState(
-            mapCalendarToDateUI(selectedDate)
-        )
+        dateLiveData.value = mapCalendarToShortDateUI(selectedDate)
     }
 
     override fun getTicketsOfferLiveData(): LiveData<List<TicketsOfferUI>> = ticketsOfferLiveData
 
     override fun getSingleEventLiveData(): SingleEventLiveData<SelectedTownScreenState> =
         singleEventLiveData
+
+    override fun getDateLivData(): LiveData<String> = dateLiveData
 
     override fun onClickClear() {
         singleEventLiveData.value = SelectedTownScreenState.ClearWhere
@@ -63,28 +74,47 @@ class SelectedTownViewModelImpl @Inject constructor(private val repository: AirT
 
     override fun onClickViewAllTickets(whereFrom: String, where: String) {
         if (whereFrom.isBlank())
-            singleEventLiveData.value = SelectedTownScreenState.Error(NO_SELECTED_WHERE_FROM)
+            singleEventLiveData.value = SelectedTownScreenState.Error(
+                resourceProvider.getString(
+                    StringEnum.NO_SELECTED_WHERE_FROM
+                )
+            )
         else if (where.isBlank())
-            singleEventLiveData.value = SelectedTownScreenState.Error(NO_SELECTED_WHERE)
+            singleEventLiveData.value = SelectedTownScreenState.Error(
+                resourceProvider.getString(
+                    StringEnum.NO_SELECTED_WHERE
+                )
+            )
         else
             singleEventLiveData.value =
                 SelectedTownScreenState.OpenViewAllTicketsState(
-                    "$whereFrom-$where",
-                    mapCalendarToDateUI(selectedDate)
+                    String.format(resourceProvider.getString(StringEnum.FLIGHT), whereFrom, where),
+                    mapCalendarToLongDateUI(selectedDate)
                 )
     }
 
     override fun onChangeDepartureDate(date: Long) {
         selectedDate = Calendar.getInstance().apply { timeInMillis = date }
-        singleEventLiveData.value = SelectedTownScreenState.ChangeDepartureDateState(
-            mapCalendarToDateUI(selectedDate)
-        )
+        dateLiveData.value = mapCalendarToShortDateUI(selectedDate)
     }
 
-    private fun mapCalendarToDateUI(calendar: Calendar) =
+    private fun mapCalendarToShortDateUI(calendar: Calendar) =
         calendar.let {
-            " ${it.get(Calendar.DAY_OF_MONTH)} ${mapCalendarMonthToMonthUI(it.get(Calendar.MONTH))}, " +
-                    mapCalendarDayOfWeekToDayUI(it.get(Calendar.DAY_OF_WEEK))
+            String.format(
+                resourceProvider.getString(StringEnum.SHORT_DATE),
+                it.get(Calendar.DAY_OF_MONTH),
+                mapCalendarMonthToMonthUI(it.get(Calendar.MONTH)).first,
+                mapCalendarDayOfWeekToDayUI(it.get(Calendar.DAY_OF_WEEK))
+            )
+        }
+
+    private fun mapCalendarToLongDateUI(calendar: Calendar) =
+        calendar.let {
+            String.format(
+                resourceProvider.getString(StringEnum.LONG_DATE),
+                it.get(Calendar.DAY_OF_MONTH),
+                mapCalendarMonthToMonthUI(it.get(Calendar.MONTH)).second
+            )
         }
 
     private fun mapTicketsOfferToTicketsOfferUI(
@@ -93,21 +123,13 @@ class SelectedTownViewModelImpl @Inject constructor(private val repository: AirT
     ): TicketsOfferUI =
         TicketsOfferUI(
             idImage = when (index) {
-                0 -> R.drawable.red_circle
-                1 -> R.drawable.blue_circle
-                2 -> R.drawable.white_circle
-                else -> R.drawable.white_circle
+                0 -> resourceProvider.getFotoId(FotoEnum.RED_CIRCLE)
+                1 -> resourceProvider.getFotoId(FotoEnum.BLUE_CIRCLE)
+                2 -> resourceProvider.getFotoId(FotoEnum.WHITE_CIRCLE)
+                else -> resourceProvider.getFotoId(FotoEnum.WHITE_CIRCLE)
             },
             title = ticketsOffer.title,
             price = ticketsOffer.price.toStringForUI(),
             timeRange = ticketsOffer.timeRange.joinToString(" ")
         )
-
-    companion object {
-        private const val DEFAULT_ERROR = "Default error"
-
-        private const val NO_SELECTED_WHERE_FROM = "Не выбрано место отправления"
-
-        private const val NO_SELECTED_WHERE = "Не выбрано место назначения"
-    }
 }

@@ -1,6 +1,9 @@
 package com.tchaikovsky.airtickets.presentation.selected_town
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -57,6 +60,7 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
         with(viewModel) {
             getTicketsOfferLiveData().observe(viewLifecycleOwner) { renderTicketsOffer(it) }
             getSingleEventLiveData().observe(viewLifecycleOwner) { renderData(it) }
+            getDateLivData().observe(viewLifecycleOwner){setDepartureDate(it)}
         }
     }
 
@@ -100,9 +104,20 @@ class SelectedTownFragment : ViewBindingFragment<FragmentSelectedTownBinding>(
                 )
                 .addToBackStack("")
                 .commitAllowingStateLoss()
+        }
+    }
 
-            is SelectedTownScreenState.ChangeDepartureDateState -> binding.dateFab.text =
-                selectedTownScreenState.date
+    private fun setDepartureDate(date: String){
+        date.let {
+            val length = it.length
+            val spanText = SpannableString(it)
+            spanText.setSpan(
+                ForegroundColorSpan(resources.getColor(R.color.light_gray, null)),
+                length - 4,
+                length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            binding.dateFab.text = spanText
         }
     }
 

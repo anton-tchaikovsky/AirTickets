@@ -3,6 +3,7 @@ package com.tchaikovsky.airtickets.presentation.main_menu
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -25,6 +26,12 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
         })[MainMenuViewModelImpl::class.java]
     }
 
+    private val onBackPressedSearchBottomSheetCallback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            searchBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+    }
+
     private lateinit var searchBottomSheetBehavior: BottomSheetBehavior<View>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +39,7 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initNavigationMenu()
-        initSearchBottomSheetDialogFragment()
+        initSearchBottomSheet()
         openAirTicketsFragment(savedInstanceState)
         viewModel.getScreenLiveData().observe(this) {
             renderMainMenuScreen(it)
@@ -41,6 +48,7 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
 
     override fun setPreferences(preferencesWhereFrom: String?, preferencesWhere: String?) {
         searchBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        onBackPressedDispatcher.addCallback(this, onBackPressedSearchBottomSheetCallback)
         searchBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
@@ -49,6 +57,7 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
                             beginTransaction().remove(it).commit()
                         }
                     }
+                    onBackPressedSearchBottomSheetCallback.remove()
                 }
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -67,7 +76,7 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
         searchBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
-    private fun initSearchBottomSheetDialogFragment() {
+    private fun initSearchBottomSheet() {
         searchBottomSheetBehavior = BottomSheetBehavior.from(binding.searchBottomSheet)
     }
 
@@ -139,8 +148,7 @@ class MainMenuActivity : AppCompatActivity(), PreferencesListener, RemoveSearchT
 
     private fun openMockFragment(tag: String){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragments_container, MockFragment.newInstance(), tag)
-            .addToBackStack("")
+            .add(R.id.fragments_container, MockFragment.newInstance(), tag)
             .commitAllowingStateLoss()
     }
 }

@@ -30,5 +30,13 @@
     <string name="dash">—</string>
     <string name="slash">/</string>
     <string name="without_transfers">Без пересадок</string>
-
+    <string name="default_error">Default error</string>
+    <string name="not_selected_where">Не выбрано место отправления</string>
+    <string name="not_selected_where_from">Не выбрано место назначения</string>
+    <string name="flight">%s-%s</string>
+    <string name="time">%s:%s</string>
+    <string name="flight_time">%sч. %sм.</string>
+    <string name="short_date">%s %s, %s</string>
+    <string name="long_date">%s %s, 1 пассажир</string>
+    <string name="digits">1234567890абвгдеёжзиклмнопрстуфхцчшщъыьэюя., -АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ</string>
 </resources>

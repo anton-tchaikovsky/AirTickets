@@ -14,14 +14,14 @@
     </style>
 
     <style name="AirTicketScreenCardView" parent="Widget.Material3.CardView.Outlined">
-        <item name="cardCornerRadius">16dp</item>
-        <item name="strokeWidth">8dp</item>
+        <item name="cardCornerRadius">@dimen/middle_corner_size</item>
+        <item name="strokeWidth">@dimen/big_stroke_width</item>
         <item name="strokeColor">@color/stroke_gray</item>
         <item name="cardBackgroundColor">@color/gray</item>
     </style>
 
     <style name="SearchTicketScreenCardView" parent="Widget.Material3.CardView.Filled">
-        <item name="cardCornerRadius">16dp</item>
+        <item name="cardCornerRadius">@dimen/middle_corner_size</item>
         <item name="cardBackgroundColor">@color/stroke_gray</item>
     </style>
 
@@ -29,35 +29,36 @@
     <style name="SearchEditText" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/light_gray</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/middle_text_size</item>
         <item name="android:inputType">textCapWords</item>
         <item name="android:background">@color/gray</item>
+        <item name="android:digits">@string/digits</item>
     </style>
 
     <style name="SloganTextView" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/slogan_text_size</item>
+        <item name="android:textSize">@dimen/big_text_size</item>
     </style>
 
     <style name="TabTextView" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
         <item name="android:textAlignment">center</item>
     </style>
 
     <style name="BlueTextView" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/blue</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/middle_text_size</item>
     </style>
 
     <style name="RounderImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">@dimen/middle_corner_size</item>
     </style>
 
     <style name="SmallRounderImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">@dimen/small_corner_size</item>
     </style>
     
     <style name="TabFabStyle" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
@@ -68,14 +69,14 @@
     <style name="BlueFabStyle" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
         <item name="backgroundTint">@color/blue</item>
         <item name="android:textAppearance">?attr/textAppearanceBodyMedium</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/middle_text_size</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">italic</item>
         <item name="shapeAppearanceOverlay">@style/FabShapeAppearance</item>
     </style>
 
     <style name="FabShapeAppearance" parent="ShapeAppearance.Material3.SmallComponent">
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">@dimen/small_corner_size</item>
     </style>
 
 </resources>
